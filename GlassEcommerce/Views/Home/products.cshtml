@@ -1,0 +1,136 @@
+﻿@model GlassEcommerce.Models.ProductModel
+
+@{
+    ViewBag.Title = "products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="banner_inner">
+    <div class="services-breadcrumb">
+        <div class="inner_breadcrumb">
+
+            <ul class="short">
+                <li>
+                    <a href="index.html">Home</a>
+                    <i>|</i>
+                </li>
+                <li>Shop</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+@*<form action="@Url.Action("Search", "Products")" method="get">
+    <input type="text" name="query" placeholder="Search products">
+    <button type="submit">Search</button>
+</form>*@
+
+
+<!-- Display products -->
+
+
+<!--//banner -->
+<h3 class="tittle-w3layouts my-lg-4 my-4">New Arrivals for you </h3>
+
+<div class="container">
+    <a href="@Url.Action("products", "Home")" class="btn btn-outline-dark">All Categories</a>
+    @foreach (var c in Model.cat)
+    {
+
+
+
+        <a href="@Url.Action("products", "Home", new {id=c.Cat_id })" class="btn btn-outline-dark"> @c.Cat_Name</a>
+        @*<a href="@Url.Action("products", "Home", new {id=c.Cat_id })" class="btn btn-outline-dark d-md-inline d-block">@c.Cat_Name</a><br />*@
+    }
+</div>
+<div class="row mt-lg-3 mt-0">
+    @foreach (var p in Model.pro)
+    {
+        <!-- /womens -->
+        <div class="col-md-3 product-men women_two">
+            <div class="product-googles-info googles">
+                <div class="men-pro-item">
+                    <div class="men-thumb-item">
+                        <img src="@Url.Content(p.Product_pic)" class="img-fluid" alt="">
+                        <div class="men-cart-pro">
+                            <div class="inner-men-cart-pro">
+                                <a href="@Url.Action("PDetails", "Products", new {id=p.Product_id })" class="link-product-add-cart">Quick View</a>
+
+
+                            </div>
+                        </div>
+                        <span class="product-new-top">New</span>
+                    </div>
+                    <div class="item-info-product">
+
+                        <div class="info-product-price">
+                            <div class="grid_meta">
+                                <div class="product_price">
+                                    <h4>
+                                        <a href="single.html">@p.Product_name</a>
+                                    </h4>
+                                    <div class="grid-price mt-2">
+                                        <span class="money ">$@p.Product_price</span>
+                                    </div>
+                                </div>
+                                <ul class="stars">
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="googles single-item hvr-outline-out">
+                                <form action="#" method="post">
+                                    <input type="hidden" name="cmd" value="_cart">
+                                    <input type="hidden" name="add" value="1">
+                                    <input type="hidden" name="googles_item" value="Aislin Wayfarer">
+                                    <input type="hidden" name="amount" value="775.00">
+                                    <button type="submit" class="googles-cart pgoogles-cart">
+
+                                        <i class="">   <a class="item_add" href="@Url.Action("AddToCart", "Products", new { id = p.Product_id })"><i></i>Cart</a></i>
+                                    </button>
+
+                                </form>
+                                @*<div class="product-bottom">
+                                        <h3><a href="@Url.Action("PDetails", "Products", new {id=p.Product_id })" class="link-product-add-cart">@p.Product_name</a></h3>
+                                        <h4>
+                                            <a class="item_add" href="@Url.Action("AddToCart", "Products", new { id = p.Product_id })"><i></i>A</a>
+                                            <span class="item_price">$ @p.Product_price</span>
+                                        </h4>
+                                    </div>*@
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <br />
+        </div>
+
+
+    }
+
+    <!-- /mens -->
+</div>
+<br />

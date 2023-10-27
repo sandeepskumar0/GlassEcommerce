@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "AdminPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AdminPage</h2>
+
+<h2>Carted Items</h2>
+<ul>
+    @foreach (var product in ViewBag.Cart)
+    {
+        <li>@product.Product_Name</li>
+        <!-- Add more item-related data as needed -->
+    }
+</ul>
+
+<h2>Customer Details</h2>
+<p>Name: @ViewBag.User.User_Email</p>
+<!-- Display other customer details as needed -->

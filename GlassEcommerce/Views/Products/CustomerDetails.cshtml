@@ -1,0 +1,20 @@
+﻿
+@model GlassEcommerce.Models.CustomerDetails
+@{
+    ViewBag.Title = "CustomerDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("ProcessCustomerDetails", "Products", FormMethod.Post))
+{
+    <div>
+        <!-- Collect customer details here (e.g., name, email, address) -->
+        @Html.LabelFor(model => model.User_Email)
+        @Html.TextBoxFor(model => model.User_Email)
+        <!-- Add more fields as needed -->
+
+        <button type="submit">Submit</button>
+    </div>
+}
+

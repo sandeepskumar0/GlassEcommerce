@@ -1,0 +1,35 @@
+﻿@model GlassEcommerce.Models.Admin
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Admin</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Admin_Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Admin_Username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Admin_password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Admin_password)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Admin_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

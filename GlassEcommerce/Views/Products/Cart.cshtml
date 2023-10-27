@@ -1,0 +1,142 @@
+﻿@using GlassEcommerce.Models
+@{
+    int row = 0; int totalQuantity = 0; double totalAmount = 0;
+  
+        ViewBag.Title = "Cart";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+    </head>
+    <body>
+
+        <div class="banner_inner">
+            <div class="services-breadcrumb">
+                <div class="inner_breadcrumb">
+                    <ul class="short">
+                        <li><a href="index.html">Home</a><i>|</i></li>
+                        <li>Checkout</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <section class="banner-bottom-wthreelayouts py-lg-5 py-3">
+            <div class="container">
+                <div class="inner-sec-shop px-lg-4 px-3">
+                    <h3 class="tittle-w3layouts my-lg-4 mt-3">Checkout</h3>
+                    <div class="checkout-right">
+                        <h4>Your shopping cart contains:</h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered ">
+                                <thead>
+                                    <tr>
+                                        <th>SL No.</th>
+                                        <th>Product Image</th>
+                                        <th>Quantity</th>
+                                        <th>Product Name</th>
+                                        <th>Price</th>
+                                        <th>Remove</th>
+                                    </tr>
+                                </thead>
+                                @if (Session["myCart"] != null)
+                                {
+                                    <tbody>
+                                        @foreach (var item in (List<Product>)Session["myCart"])
+                                        {
+                                            <tr>
+                                                <td></td>
+                                                <td><img src="@Url.Content(@item.Product_pic)" alt="Product 1" class="product-image" height="150px;"></td>
+                                                <td>
+                                                    <div class="quantity-input">
+                                                        @*<span class="minus-icon"><i class="fas fa-minus"></i></span>
+                                    @item.PRO_QUANTITY
+                                    <span class="plus-icon"><i class="fas fa-plus"></i></span>*@
+
+                                                        <a href="@Url.Action("PlusToCart","Products" , new {RowNo=row})"><i class="fa fa-plus"></i></a>
+                                                        @item.PRO_QUANTITY
+                                                        <a href="@Url.Action("MinusFromCart","Products" , new {RowNo=row})"><i class="fa fa-minus"></i></a>
+                                                    </div>
+                                                </td>
+                                                <td>@item.Product_name</td>
+                                                <td>$ @item.Product_name</td>
+                                                @(double.Parse(item.Product_price.ToString()) * int.Parse(item.PRO_QUANTITY.ToString()))
+                                                @*<td><button class="btn btn-danger">Remove</button></td>*@
+                                                <td>
+                                                    <a href="@Url.Action("RemoveFromCart","Products", new {RowNo=row})">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                                                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                                                        </svg>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            row++;
+                                            totalQuantity += item.PRO_QUANTITY;
+                                            totalAmount += double.Parse(item.Product_price.ToString()) * int.Parse(item.PRO_QUANTITY.ToString());
+                                        }
+
+
+                                        <tr class="text-center">
+                                            <th></th>
+                                            <th></th>
+                                            <th>@totalQuantity</th>
+                                            <th></th>
+                                            <th>Price :@totalAmount</th>
+                                        </tr>
+
+
+
+                                    </tbody>
+
+
+                                }
+
+
+                                <!-- Add more rows as needed -->
+
+                            </table>
+                            <h3>----------------------------------------------------------------------</h3>
+                            @if (Session["myCart"] == null || row == 0)
+                            {
+                                <div class="text-center">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="col-sm-4 ">
+                                                <h5 style="color:dimgrey">your  cart is empty</h5>
+                                                <a href="@Url.Action("products", "Home")"><span class="btn btn-outline-danger">Buy Now</span></a>
+                                            </div>
+                                            <div class="col-sm-4"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    
+                    <div class="container" style="text-align:right">
+                        <h4><strong>Cart Totals</strong></h4>
+                        <h6>Total Quantity : @totalQuantity</h6>
+                        </th>
+                        <h6>Total :@totalAmount<span style="color:forestgreen"> </span> </h6>
+                        <th></th>
+                        <br />
+                        <a href="@Url.Action("CustomerDetails","Products")" class="btn btn-outline-danger py-3 px-4">Proceed to Checkout</a>
+                        <a href="@Url.Action("Products","Home")" class="btn btn-outline-dark py-3 px-4">Continue Shopping</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </body>
+</html>
